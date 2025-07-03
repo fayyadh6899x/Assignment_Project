@@ -51,75 +51,81 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Edit Mahasiswa</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/index.js"></script>
 </head>
-<body class="bg-light">
 
-<div class="container mt-5 mb-5">
-    <h1 class="mb-4 text-center">Edit Mahasiswa</h1>
+<body class="bg-light fade-in">
 
-    <form name="mahasiswaForm" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()" class="p-4 border rounded bg-white shadow">
+    <div class="container mt-5 mb-5">
+        <h1 class="mb-4 text-center">Edit Mahasiswa</h1>
 
-        <div class="mb-3">
-            <label class="form-label">NIM</label>
-            <input type="text" name="nim" class="form-control" value="<?= htmlspecialchars($data['nim']) ?>" readonly>
-        </div>
 
-        <div class="mb-3">
-            <label class="form-label">Nama</label>
-            <input type="text" name="nama" class="form-control" value="<?= htmlspecialchars($data['nama']) ?>" required>
-        </div>
+        <div id="alert-container"></div>
 
-        <div class="mb-3">
-            <label class="form-label">Jurusan</label>
-            <input type="text" name="jurusan" class="form-control" value="<?= htmlspecialchars($data['jurusan']) ?>" required>
-        </div>
+        <form name="mahasiswaForm" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()" class="p-4 border rounded bg-white shadow">
 
-        <div class="mb-3">
-            <label class="form-label">Foto Profil</label><br>
-            <?php if (!empty($data['foto'])): ?>
-                <img src="<?= htmlspecialchars($data['foto']) ?>" width="100" height="100" class="rounded mb-3" style="object-fit:cover;"><br>
-            <?php endif; ?>
-            <input type="file" name="foto" class="form-control" accept="image/*">
-        </div>
+            <div class="mb-3">
+                <label class="form-label">NIM</label>
+                <input type="text" name="nim" class="form-control" value="<?= htmlspecialchars($data['nim']) ?>" readonly>
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Tanggal Lahir</label>
-            <input type="date" name="tgl_lahir" class="form-control" value="<?= htmlspecialchars($data['tgl_lahir']) ?>" required>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Nama</label>
+                <input type="text" name="nama" class="form-control" value="<?= htmlspecialchars($data['nama']) ?>">
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Jenis Kelamin</label>
-            <select name="jenis_kelamin" class="form-select" required>
-                <option value="Laki-laki" <?= $data['jenis_kelamin'] == 'Laki-laki' ? 'selected' : '' ?>>Laki-laki</option>
-                <option value="Perempuan" <?= $data['jenis_kelamin'] == 'Perempuan' ? 'selected' : '' ?>>Perempuan</option>
-            </select>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Jurusan</label>
+                <input type="text" name="jurusan" class="form-control" value="<?= htmlspecialchars($data['jurusan']) ?>">
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Alamat</label>
-            <textarea name="alamat" class="form-control" rows="3" required><?= htmlspecialchars($data['alamat']) ?></textarea>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Foto Profil</label><br>
+                <?php if (!empty($data['foto'])): ?>
+                    <img src="<?= htmlspecialchars($data['foto']) ?>" width="100" height="100" class="rounded mb-3" style="object-fit:cover;"><br>
+                <?php endif; ?>
+                <input type="file" name="foto" class="form-control" accept="image/*">
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($data['email']) ?>" required>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Tanggal Lahir</label>
+                <input type="date" name="tgl_lahir" class="form-control" value="<?= htmlspecialchars($data['tgl_lahir']) ?>">
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Telepon</label>
-            <input type="text" name="telepon" class="form-control" value="<?= htmlspecialchars($data['telepon']) ?>" required>
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Jenis Kelamin</label>
+                <select name="jenis_kelamin" class="form-select">
+                    <option value="">-- Pilih Jenis Kelamin --</option>
+                    <option value="Laki-laki" <?= $data['jenis_kelamin'] == 'Laki-laki' ? 'selected' : '' ?>>Laki-laki</option>
+                    <option value="Perempuan" <?= $data['jenis_kelamin'] == 'Perempuan' ? 'selected' : '' ?>>Perempuan</option>
+                </select>
+            </div>
 
-        <button type="submit" class="btn btn-warning">Update</button>
-        <a href="index.php" class="btn btn-secondary">Batal</a>
-    </form>
-</div>
+            <div class="mb-3">
+                <label class="form-label">Alamat</label>
+                <textarea name="alamat" class="form-control" rows="3"><?= htmlspecialchars($data['alamat']) ?></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="text" name="email" class="form-control" value="<?= htmlspecialchars($data['email']) ?>">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Telepon</label>
+                <input type="text" name="telepon" class="form-control" value="<?= htmlspecialchars($data['telepon']) ?>">
+            </div>
+
+            <button type="submit" class="btn btn-warning">Update</button>
+            <a href="index.php" class="btn btn-secondary">Batal</a>
+        </form>
+    </div>
 
 </body>
-</html>
 
+</html>

@@ -1,4 +1,8 @@
+
+
 function validateForm() {
+
+
     const form = document.forms["mahasiswaForm"];
 
     const nim = form["nim"].value.trim();
@@ -10,36 +14,27 @@ function validateForm() {
     const email = form["email"].value.trim();
     const telepon = form["telepon"].value.trim();
 
-    if (nim === "" || nama === "" || jurusan === "" || tgl_lahir === "" || jenis_kelamin === "" || alamat === "" || email === "" || telepon === "") {
-        alert("Semua kolom wajib diisi!");
+      if (!nim || !nama || !jurusan || !tgl_lahir || !jenis_kelamin || !alamat || !email || !telepon) {
+        showAlert("Semua kolom wajib diisi!");
         return false;
     }
-    
+
+    // Validasi NIM angka
     if (isNaN(nim)) {
-        alert("NIM harus berupa angka!");
+        showAlert("NIM harus berupa angka!");
         return false;
     }
-    
-    const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
-    if (!emailPattern.test(email)) {
-        alert("Format email tidak valid!");
-        return false;
-  }
 
+    // Validasi nomor telepon angka
     if (isNaN(telepon)) {
-        alert("Nomor telepon harus berupa angka!");
-        return false;
-    }
-
-    if (telepon.length < 10) {
-        alert("Nomor telepon minimal 10 digit!");
+        showAlert("Nomor telepon harus berupa angka!");
         return false;
     }
 
     return true;
 }
 
-function confirmDelete(name) {
-    return confirm(`Hapus data mahasiswa \"${name}\"?`);
-}
 
+function confirmDelete(name) {
+    return confirm(`Hapus data mahasiswa "${name}"?`);
+}
